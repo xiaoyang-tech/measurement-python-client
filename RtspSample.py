@@ -39,7 +39,7 @@ class RtspSample(Sample):
 
 if __name__ == '__main__':
     app_id, sdk_key, config = get_sample_args()
-    rtsp = 'rtsp://colin:xy123123@10.0.0.4:554/h264/ch1/main/av_stream'
+    rtsp = 'rtsp://'
     fps = 25  # 假定帧率为25（需根据实际推流帧率调整，设置帧率应小于等于实际推流帧率）
     RtspSample(app_id, sdk_key, BloodPressure, Anxiety, **config).start(rtsp, fps)
 
