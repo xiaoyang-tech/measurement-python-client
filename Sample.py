@@ -40,7 +40,7 @@ class Sample(ABC):
 def get_sample_args():
     config = {
         'logging_config': {
-            'level': logging.DEBUG,
+            'level': logging.WARNING,
             'format': '%(asctime)s - %(levelname)s - %(filename)s[line:%(lineno)d]: %(message)s',
             'filename': 'log.txt',
             'filemode': 'w'
