@@ -1,4 +1,6 @@
 import logging
+from multiprocessing import Value
+from ctypes import c_bool
 from abc import ABC, abstractmethod
 from xy_health_measurement_sdk.Measurement import Measurement
 
@@ -13,6 +15,7 @@ class Sample(ABC):
         self._measurement.subscribe('crashed', self._exception_handler)
 
         self._collected = False
+        self._stopped = Value(c_bool, False)
 
     def _started_handler(self, sender, **kwargs):
         print(kwargs)
@@ -25,16 +28,27 @@ class Sample(ABC):
 
     def _whole_report_handler(self, sender, **kwargs):
         print(kwargs)
+        self.stop()
 
     def _exception_handler(self, sender, **kwargs):
         print(kwargs['msg_cn'])
         if kwargs['level'] == 'error':
             self._collected_handler(self)
-            self._measurement.stop()
+            self.stop()
 
     @abstractmethod
     def start(self, *args):
         pass
+
+    def stop(self):
+        with self._stopped.get_lock():
+            self._stopped.value = True
+            self._measurement.stop()
+
+    @property
+    def stopped(self):
+        with self._stopped.get_lock():
+            return self._stopped.value
 
 
 def get_sample_args():
@@ -47,5 +61,5 @@ def get_sample_args():
         }
     }
     logging.basicConfig(**config['logging_config'])
-    app_id, sdk_key = '', ''
+    app_id, sdk_key = '3a11e2900a80cc6281f8409b5b103722', '3a11e2900a802476cb35026baff6e3db'
     return app_id, sdk_key, config
