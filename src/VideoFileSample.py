@@ -1,5 +1,6 @@
 import cv2
 import logging
+from time import sleep
 from Sample import Sample, get_sample_args
 
 
@@ -19,7 +20,7 @@ class VideoFileSample(Sample):
                 return
             self._measurement.start(frame)
 
-            while not self._collected:
+            while not self._collected and not self.stopped:
                 success, frame = cap.read()
                 if not success:
                     break
@@ -34,6 +35,10 @@ class VideoFileSample(Sample):
 
 if __name__ == '__main__':
     app_id, sdk_key, config = get_sample_args()
-    VideoFileSample(app_id, sdk_key, **config).start('resources/video.mp4')
+    sample = VideoFileSample(app_id, sdk_key, **config)
+    sample.start('resources/video.mp4')
 
-    input("测量中，请勿退出...")
+    # input("测量中，请勿退出...")
+    while not sample.stopped:
+        sleep(0.2)
+    print('all done')

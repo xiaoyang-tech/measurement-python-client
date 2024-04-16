@@ -2,13 +2,23 @@
 
 [点击查看](https://measurement.xymind.cn/docs/sdk/python.html)用户手册。
 
+**运行之前需要先在Sample.py中填入许可证（app_id, sdk_key）。**
+
+### 本地运行
 ```bash
-# 安装依赖项
+# dependencies installation
 pip install -r requirements.txt
 
-# 运行之前需要先在Sample.py中填入许可证（app_id, sdk_key）
-
-# 运行示例
+# samples
 python VideoFileSample.py
 python RtspSample.py # 运行该示例需要设置rtsp地址和实际帧率
+```
+
+### Docker
+```bash
+# build
+docker build -t xiaoyangtech/measurement-python-client-sample:2.0 .
+
+# execute
+docker run -it --rm -v $PWD/src:/app/src xiaoyangtech/measurement-python-client-sample:2.0
 ```
