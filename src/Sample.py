@@ -12,6 +12,7 @@ class Sample(ABC):
         self._measurement.subscribe('collected', self._collected_handler)
         self._measurement.subscribe('chunk_report_generated', self._chunk_report_handler)
         self._measurement.subscribe('whole_report_generated', self._whole_report_handler)
+        self._measurement.subscribe('state_updated', self._state_updated_handler)
         self._measurement.subscribe('crashed', self._exception_handler)
 
         self._collected = False
@@ -29,6 +30,9 @@ class Sample(ABC):
     def _whole_report_handler(self, sender, **kwargs):
         print(kwargs)
         self.stop()
+
+    def _state_updated_handler(self, sender, **kwargs):
+        print(kwargs)
 
     def _exception_handler(self, sender, **kwargs):
         print(kwargs['msg_cn'])
