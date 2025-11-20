@@ -1,0 +1,17 @@
+.git/
+.gitignore
+.idea/
+.vscode/
+.DS_Store
+
+__pycache__/
+*.py[cod]
+dist/
+*.egg-info/
+venv/
+nupkg/
+log.txt
+*.swp
+*.*~
+LICENSE
+README.md
