@@ -1,1 +1,3 @@
-xy-health-measurement-sdk
+# xy-health-measurement-sdk==2.2.3dev1
+xy-health-measurement-sdk==2.2.3
+python-dotenv==1.2.1

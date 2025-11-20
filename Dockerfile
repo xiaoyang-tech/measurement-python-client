@@ -1,8 +1,10 @@
-FROM xiaoyangtech/measurement-python-client-sdk:2.0
+FROM xiaoyangtech/measurement-python-client-sdk:latest
 LABEL authors="colin chang"
 
-WORKDIR /app
-COPY ./resources /app/resources
-COPY ./src /app/src
+ARG ACCELERATE_CONFIG
+COPY ./src .
+COPY ./requirements.txt requirements.txt
+RUN pip3 install --no-cache-dir --upgrade pip && \
+    pip3 install --no-cache-dir ${ACCELERATE_CONFIG} -r requirements.txt
 
-CMD ["python", "src/VideoFileSample.py"]
+CMD ["python3", "VideoFileSample.py"]

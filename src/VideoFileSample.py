@@ -28,6 +28,7 @@ class VideoFileSample(Sample):
                 self._measurement.enqueue(frame, timestamp)
         except Exception as ex:
             logging.critical(ex)
+            self.stop()
         finally:
             if cap:
                 cap.release()
@@ -36,9 +37,9 @@ class VideoFileSample(Sample):
 if __name__ == '__main__':
     app_id, sdk_key, config = get_sample_args()
     sample = VideoFileSample(app_id, sdk_key, **config)
-    sample.start('resources/video.mp4')
+    sample.start('video.mp4')
 
-    # input("测量中，请勿退出...")
     while not sample.stopped:
         sleep(0.2)
+    
     print('all done')
