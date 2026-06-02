@@ -29,8 +29,8 @@ conda install -y -c conda-forge libstdcxx-ng && \
 pip install -r requirements.txt
 
 # 运行示例
-python VideoFileSample.py
-# python RtspSample.py # 运行该示例需要设置rtsp地址和实际帧率
+python video_file_sample.py
+# python rtsp_sample.py # 运行该示例需要在 .env 中设置 RTSP_URL 和 RTSP_FPS
 ```
 
 ### Docker运行
@@ -40,6 +40,7 @@ python VideoFileSample.py
 ```bash
 # 构建镜像
 docker build --platform linux/amd64 -t xiaoyangtech/measurement-python-client-sample:latest .
+
 # 运行容器
 docker run -it --rm \
   -v ./src/.env:/app/.env \

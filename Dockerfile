@@ -7,4 +7,4 @@ COPY ./requirements.txt requirements.txt
 RUN pip3 install --no-cache-dir --upgrade pip && \
     pip3 install --no-cache-dir ${ACCELERATE_CONFIG} -r requirements.txt
 
-CMD ["python3", "VideoFileSample.py"]
+CMD ["python3", "video_file_sample.py"]
